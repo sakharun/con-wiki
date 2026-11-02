@@ -1,0 +1,252 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-paper: var(--c-paper);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-accent: var(--c-accent);
+  --color-accent-ink: var(--c-accent-ink);
+  --color-accent-soft: var(--c-accent-soft);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Literata', Georgia, 'Times New Roman', serif;
+}
+
+:root {
+  --c-paper: #f6f1e6;
+  --c-surface: #fffcf4;
+  --c-ink: #211e18;
+  --c-muted: #6b6457;
+  --c-line: #ddd2bd;
+  --c-accent: #2f4d7d;
+  --c-accent-ink: #fdfcf8;
+  --c-accent-soft: #e7edf8;
+  color-scheme: light;
+}
+
+.dark {
+  --c-paper: #14151a;
+  --c-surface: #1b1d24;
+  --c-ink: #eae4d7;
+  --c-muted: #a29b8c;
+  --c-line: #2e313b;
+  --c-accent: #9ab8e9;
+  --c-accent-ink: #10131a;
+  --c-accent-soft: #222a3a;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-paper text-ink font-sans antialiased;
+  background-image: radial-gradient(circle at 18% -10%, color-mix(in srgb, var(--c-accent) 7%, transparent), transparent 55%);
+  background-repeat: no-repeat;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--c-accent) 26%, transparent);
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* Поле внутри диалога поиска: рамку рисует контейнер, а не сам input. */
+.palette-input:focus-visible {
+  outline: none;
+}
+
+.skip-link {
+  @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-4 focus:py-2 focus:text-sm focus:shadow-lg;
+}
+
+/* ── Статья ─────────────────────────────────────────────── */
+
+.article-prose {
+  @apply font-serif text-[1.0625rem] leading-[1.78] text-ink;
+}
+
+.article-prose > * + * {
+  margin-top: 0.9em;
+}
+
+.article-prose h2 {
+  @apply mt-10 mb-4 scroll-mt-28 font-sans text-[1.03rem] font-semibold uppercase tracking-[0.09em] text-ink;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--c-line);
+}
+
+.article-prose h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.article-prose h3 {
+  @apply mt-7 mb-2 scroll-mt-28 font-sans text-base font-semibold text-ink;
+}
+
+.article-prose h4 {
+  @apply mt-5 mb-1 scroll-mt-28 font-sans text-sm font-semibold uppercase tracking-wide text-muted;
+}
+
+.article-prose p {
+  @apply my-0;
+}
+
+.article-prose ul {
+  @apply my-3 list-none space-y-2 pl-0;
+}
+
+.article-prose ol {
+  @apply my-3 list-decimal space-y-2 pl-6;
+}
+
+.article-prose li {
+  @apply relative pl-5;
+}
+
+.article-prose ul > li::before {
+  content: '';
+  @apply absolute left-0 top-[0.68em] size-[5px] rounded-full bg-accent/50;
+}
+
+.article-prose ul ul > li::before {
+  @apply bg-muted/50;
+}
+
+.article-prose strong {
+  @apply font-semibold;
+}
+
+.article-prose em {
+  @apply italic;
+}
+
+.article-prose blockquote {
+  @apply my-5 border-l-2 border-accent/40 pl-4 text-[0.98em] italic text-muted;
+}
+
+.article-prose code {
+  @apply rounded bg-line/40 px-1.5 py-0.5 font-sans text-[0.82em];
+}
+
+.article-prose pre {
+  @apply my-5 overflow-x-auto rounded-lg border border-line/70 bg-surface p-4 text-sm leading-relaxed;
+}
+
+.article-prose pre code {
+  @apply bg-transparent p-0;
+}
+
+.article-prose a:not(.wl) {
+  @apply text-accent underline decoration-accent/35 underline-offset-2 hover:decoration-accent;
+}
+
+.article-prose hr {
+  @apply my-8 border-line;
+}
+
+.article-prose table {
+  @apply my-5 w-full border-collapse text-[0.92em];
+}
+
+.article-prose th {
+  @apply border-b border-line bg-surface px-3 py-2 text-left font-sans text-xs font-semibold uppercase tracking-wide;
+}
+
+.article-prose td {
+  @apply border-b border-line/60 px-3 py-2 align-top;
+}
+
+/* Вики-ссылки */
+.wl {
+  @apply text-accent underline decoration-accent/35 decoration-1 underline-offset-[3px] transition-colors hover:decoration-accent;
+}
+
+.wl-ref {
+  @apply inline-flex items-baseline gap-1 rounded-[4px] border border-dashed border-line px-1.5 py-px font-sans text-[0.74em] leading-[1.5] text-muted;
+  background: color-mix(in srgb, var(--c-line) 22%, transparent);
+  cursor: help;
+}
+
+.wl-ref::before {
+  content: '↗';
+  @apply text-[0.85em] opacity-70;
+}
+
+/* Определение */
+.definition {
+  @apply relative rounded-xl border border-line/80 bg-surface px-6 py-5 font-serif text-[1.13rem] leading-[1.7] sm:px-7 sm:py-6;
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--c-line) 60%, transparent);
+}
+
+.definition::before {
+  content: '';
+  @apply absolute left-0 top-5 bottom-5 w-[3px] rounded-full bg-accent/70;
+}
+
+.definition .wl {
+  @apply decoration-accent/40;
+}
+
+/* ── Мелкие утилиты ─────────────────────────────────────── */
+
+.card {
+  @apply rounded-xl border border-line/80 bg-surface transition-colors;
+}
+
+.card-hover {
+  @apply hover:border-accent/50 hover:bg-accent-soft/40;
+}
+
+.kbd {
+  @apply inline-flex items-center rounded border border-line bg-paper px-1.5 py-0.5 font-sans text-[10px] font-medium uppercase tracking-wide text-muted;
+}
+
+.kbd.hidden {
+  display: none;
+}
+
+.pill {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-0.5 font-sans text-[11px] font-medium uppercase tracking-[0.08em] text-muted;
+}
+
+.fade-in {
+  animation: fade-in 0.35s ease both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .fade-in {
+    animation: none;
+  }
+}
+
+/* Скроллбар в тёмной теме */
+.dark * {
+  scrollbar-color: #3a3e4a transparent;
+}
