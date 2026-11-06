@@ -7,7 +7,7 @@ const TOKEN = /\uE000(\d+)\uE001/g
 const HEADING_LABELS = {
   'summary': 'Определение',
   'current understanding': 'Текущее понимание',
-  'evidence': 'Доказательства',
+  'evidence': 'Источники',
   'related pages': 'Связанные страницы',
   'contradictions / uncertainty': 'Противоречия и неопределённость',
   'contradictions': 'Противоречия',

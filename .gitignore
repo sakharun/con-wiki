@@ -3,3 +3,5 @@ dist
 public/content
 .DS_Store
 *.local
+wiki/log.md
+wiki/index.md
