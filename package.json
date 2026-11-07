@@ -7,7 +7,9 @@
   "scripts": {
     "content": "node scripts/build-content.mjs",
     "dev": "npm run content && vite",
-    "build": "npm run content && tsc --noEmit && vite build && node scripts/postbuild.mjs",
+    "build": "npm run content && tsc --noEmit && vite build && node scripts/prerender.mjs && node scripts/postbuild.mjs && node scripts/generate-sitemap.mjs",
+    "prerender": "node scripts/prerender.mjs",
+    "sitemap": "node scripts/generate-sitemap.mjs",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
