@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /con-wiki/
+Disallow: /con-wiki/search
+
+Sitemap: https://sakharun.github.io/con-wiki/sitemap.xml

@@ -1,5 +1,4 @@
 node_modules
-dist
 public/content
 .DS_Store
 *.local
